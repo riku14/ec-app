@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // export const signIn = () => {
 //     return async (dispatch, getState) => {
@@ -23,6 +24,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 //     }
 // }
 
+// ログインAPI
 export const signIn = createAsyncThunk(
     'users/signIn',  //アクションタイプ
     async (_, {getState, dispatch, rejectWithValue }) => {
@@ -39,3 +41,15 @@ export const signIn = createAsyncThunk(
         }
     }
 )
+
+// ユーザー登録API
+export const signUp = createAsyncThunk(
+    'users/signUp',
+    async({username, email, password}, {rejectWithValue}) =>{
+        try{
+            const response = await axios.post("http://localhost:8080/api/users/signup", {username, email, password})
+            return response.data;
+        }   catch(error) {
+            return rejectWithValue(error.response.data)
+        }
+    })

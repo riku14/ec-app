@@ -8,6 +8,7 @@ import './assets/reset.css'
 import './assets/style.css'
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import HelloJava from './testJava/HelloJava';
 
 
 
@@ -16,6 +17,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        {/* <HelloJava /> */}
         <App />
       </BrowserRouter>
     </Provider>

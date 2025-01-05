@@ -6,6 +6,7 @@ const PrimaryButton = (props) => {
       <Button
         variant="contained"
         onClick={props.onClick}
+        type='submit'
         sx={{
           backgroundColor: '#4dd0e1',
           color: '#000',
