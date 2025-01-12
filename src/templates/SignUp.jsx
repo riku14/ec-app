@@ -2,13 +2,14 @@ import React, { useCallback, useState } from 'react'
 import {TextInput} from '../compornents/UIkit'
 import PrimaryButton from '../compornents/UIkit/PrimaryButton';
 import { signUp } from '../reducks/users/operations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { error } = useSelector((state) => state.signUp)
 
   const [username, setUsername] = useState(""),
         [email, setEmail] = useState(""),
@@ -47,12 +48,14 @@ const SignUp = () => {
     }
   
     dispatch(signUp({username, email, password}))
+    .unwrap()
       .then(() => {
         console.log("サインアップ成功");
-        navigate('/');
+        navigate('/signIn');
       })
       .catch((error) => {
         console.error("SignUp Error:", error);
+        alert(error)
       });
   };
   
@@ -80,6 +83,7 @@ const SignUp = () => {
             />
           </div>
         </form>
+        {error && <div className='error-message'>{error}</div>}
     </div>
   )
 }

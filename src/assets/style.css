@@ -1,3 +1,31 @@
+/*********** temp cord ***********/
+.products{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap; /*折り返し*/
+    gap: 30px;
+    margin: 15px;
+    margin-top: 95px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.product-card{
+    width: 550px;
+    height: 800px;
+    border: 1px solid #ddd; 
+    padding: 16px; 
+    background-color: #fff; 
+    text-align: center; 
+}
+
+/*********** Error Message  ***********/
+.error-message{
+    margin: 0 auto;
+    text-align: center;
+    color: red;
+}
+
 /*********** Module Spacer ***********/
 .module-spacer--extra-extra-small {
     height: 12px
