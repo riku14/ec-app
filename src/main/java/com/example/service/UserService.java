@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Users;
+import com.example.entity.UsersDTO;
 import com.example.repository.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,16 +39,19 @@ public class UserService {
      * @param password ユーザーのパスワード
      * @return 認証されたユーザー情報
      */
-	public Users authenticateUser(String email, String password) {
+	public UsersDTO signinUsers(String email, String password) {
 		Users user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません"));
+				.orElseThrow(() -> {
+	                System.out.println("User not found for email: " + email);  // デバッグ用
+	                return new UsernameNotFoundException("ユーザーが見つかりません");
+				});
 		
 		// パスワードを照合
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("パスワードが一致しません");
         }
         
-        return user;
+        return new UsersDTO(user);
 	}
 	
 	
